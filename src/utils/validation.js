@@ -12,6 +12,43 @@ const validateSignupData = (req) => {
     } else if (!validatior.isStrongPassword(password)) {
         throw new Error("Password is not strong");
     }
-}
+};
 
-module.exports = validateSignupData;
+const validateProfileEditData = (req) => {
+    const allowedEditFields = [
+        "firstName",
+        "lastName",
+        "photo",
+        "gender",
+        "age",
+        "skills",
+        "description"
+    ];
+
+    return Object.keys(req.body).every((field) => allowedEditFields.includes(field));
+};
+
+const validatePasswordEditData = (req) => {
+    const allowedEditFields = [
+        "oldPassword",
+        "password",
+    ];
+
+    return Object.keys(req.body).every((field) => allowedEditFields.includes(field));
+};
+
+const validateForgotPasswordEditData = (req) => {
+    const allowedEditFields = [
+        "emailId",
+        "password"
+    ];
+
+    return Object.keys(req.body).every((field) => allowedEditFields.includes(field));
+};
+
+module.exports = { 
+    validateSignupData,
+    validateProfileEditData,
+    validatePasswordEditData,
+    validateForgotPasswordEditData
+};
