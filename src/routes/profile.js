@@ -8,9 +8,9 @@ const profileRouter = express.Router();
 
 profileRouter.get("/view", userAuth, async (req, res) => {
     try {
-        res.status(200).send(req.user);
+        return res.status(200).send(req.user);
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
@@ -24,12 +24,12 @@ profileRouter.patch("/edit", userAuth, async (req, res) => {
             returnDocument: "after"
         });
 
-        res.status(200).json({
+        return res.status(200).json({
             message: `${user.firstName}, your profile updated successfully.`,
             user: user
         });
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
@@ -57,7 +57,7 @@ profileRouter.patch("/password/edit", userAuth, async (req, res) => {
             user: user
         });
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 

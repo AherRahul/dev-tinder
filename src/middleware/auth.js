@@ -5,13 +5,19 @@ const userAuth = async (req, res, next) => {
     try {
         const {token} = req.cookies;
 
+        if (!token) {
+            return res.status(401).json({
+                message: "Please log in to access the page"
+            });
+        }
+
         const decodedObj = await jwt.verify(token, "DVE@Tinder$790");
         const { _id } = decodedObj;
 
         const user = await User.findById(_id);
 
         if (!user) {
-            throw new Error("Please log in to access the data");
+            throw new Error("Please log in to access the page");
         }
 
         req.user = user;

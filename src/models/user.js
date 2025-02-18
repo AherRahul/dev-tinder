@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         lowercase: true,
-        unique: true,
+        unique: true, // created the index for email ID as we set unique true
         trim: true,
         minLength: 4,
         maxLength: 50,
@@ -45,11 +45,15 @@ const userSchema = new mongoose.Schema({
     gender: {
         type: String,
         trim: true,
-        validate(value) {
-            if(!["male", "female", "other"].includes(value)) {
-                throw new Error("Please select specific gender");
-            }
-        }
+        enum: {
+            values: ["male", "female", "other"],
+            message: "{VALUE} is not supported gender type"
+        },
+        // validate(value) {
+        //     if(!["male", "female", "other"].includes(value)) {
+        //         throw new Error("Please select specific gender");
+        //     }
+        // }
     },
     photo: {
         type: String,

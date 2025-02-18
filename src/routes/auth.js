@@ -1,5 +1,5 @@
 const express = require("express");
-const validateSignupData = require("../utils/validation");
+const { validateSignupData } = require("../utils/validation");
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const { validateForgotPasswordEditData } = require("../utils/validation");
@@ -27,9 +27,9 @@ authRouter.post("/signup", async (req, res) => {
         const user = new User(userObj);
         await user.save();
     
-        res.status(200).send("User added successfully");
+        return res.status(200).send("User added successfully");
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
@@ -52,7 +52,7 @@ authRouter.post("/login", async (req, res) => {
                 res.cookie("token", token, {
                     expires: new Date(Date.now() + 8 * 3600000),
                 });
-                res.status(200).send(user);
+                return res.status(200).send(user);
             } else {
                 throw new Error("Invalid credentials");
             }
@@ -61,15 +61,15 @@ authRouter.post("/login", async (req, res) => {
         }
 
     } catch(error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
 authRouter.post("/logout", async (req, res) => {
     try {
-        res.cookie("token", null, { expires: new Date(Date.now()) }).status(200).send("user logged out");
+        return res.cookie("token", null, { expires: new Date(Date.now()) }).status(200).send("user logged out");
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
@@ -100,7 +100,7 @@ authRouter.patch("/forgotPassword", async (req, res) => {
         }
         
     } catch (error) {
-        res.status(400).send("ERROR: " + error.message);
+        return res.status(400).send("ERROR: " + error.message);
     }
 });
 
