@@ -8,9 +8,9 @@ const requestRouter = require("./routes/requests");
 const userRouter = require("./routes/user");
 const cors = require("cors");
 
-const port = process.env.PORT || 3000
 // instantiate express
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(cors({
     origin: "http://localhost:5173",
@@ -35,5 +35,6 @@ connectDB().then(() => {
         console.log("server started");
     });
 }).catch((error) => {
+    console.log(error);
     console.error("DataBase cannot be connected.");
 });
