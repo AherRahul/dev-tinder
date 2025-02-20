@@ -8,7 +8,7 @@ const requestRouter = require("./routes/requests");
 const userRouter = require("./routes/user");
 const cors = require("cors");
 
-
+const port = process.env.PORT || 3000
 // instantiate express
 const app = express();
 
@@ -31,7 +31,7 @@ connectDB().then(() => {
     console.log("DataBase connected successfully");
 
     // launching server on port 3000
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log("server started");
     });
 }).catch((error) => {
