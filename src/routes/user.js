@@ -15,7 +15,7 @@ userRouter.get("/request/received", userAuth, async(req, res) => {
         const requests = await ConnectionRequest.find({
             toUserId: loggedInUser._id,
             status: "intrested",
-        }).populate("fromUserId", "firstName lastName photo skills");
+        }).populate("fromUserId", "firstName lastName photo age gender description");
         // }).populate("fromUserId", ["firstName", "lastName"]);
         
         if (requests.length === 0) {
