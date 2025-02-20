@@ -17,7 +17,9 @@ app.use(cors({
                 "https://rdevtinder.netlify.app",
                 "http://localhost:5173"
             ],
-    credentials: true,
+    credentials: true,  // Allow sending cookies
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 // parse application/json
 app.use(express.json());
