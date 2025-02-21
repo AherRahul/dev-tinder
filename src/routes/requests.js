@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 const requestRouter = express.Router();
 
-requestRouter.post("/send/:status/:toUserId", userAuth, async (req, res) => {
+requestRouter.post("/send/:status/:toUserId", async (req, res) => {
     try {
         const fromUserId = req.user._id;
         const toUserId = req.params.toUserId;
@@ -53,7 +53,7 @@ requestRouter.post("/send/:status/:toUserId", userAuth, async (req, res) => {
     }
 });
 
-requestRouter.post("/review/:status/:requestId", userAuth, async (req, res) => {
+requestRouter.post("/review/:status/:requestId", async (req, res) => {
     try {
         const loggedInUser = req.user;
         const requestId = req.params.requestId;
