@@ -8,7 +8,7 @@ const userRouter = express.Router();
 const USER_SAFE_DATA = "firstName lastName photo skills age gender description"
 
 // get all pending connection request for logged in user
-userRouter.get("/request/received", async(req, res) => {
+userRouter.get("/request/received", userAuth, async(req, res) => {
     try {
         const loggedInUser = req.user;
 
@@ -33,7 +33,7 @@ userRouter.get("/request/received", async(req, res) => {
     }
 });
 
-userRouter.get("/connections", async(req, res) => {
+userRouter.get("/connections", userAuth, async(req, res) => {
     try {
         const loggedInUser = req.user;
         
@@ -76,7 +76,7 @@ userRouter.get("/connections", async(req, res) => {
     }
 });
 
-userRouter.get("/feed", async (req, res) => {
+userRouter.get("/feed", userAuth, async (req, res) => {
     try {
       const loggedInUser = req.user;
   
