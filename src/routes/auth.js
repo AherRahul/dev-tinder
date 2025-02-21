@@ -29,7 +29,10 @@ authRouter.post("/signup", async (req, res) => {
         const token = await savedUser.getJWT();
 
         res.cookie("token", token, {
-        expires: new Date(Date.now() + 8 * 3600000),
+            expires: new Date(Date.now() + 8 * 3600000),
+             httpOnly: true, // Prevents client-side access to the cookie
+              secure: true, // Only send the cookie over HTTPS (use false for local development)
+              sameSite: 'none', // Required for cross-origin cookies
         });
 
         res.json({ message: "User Added successfully!", data: savedUser });
