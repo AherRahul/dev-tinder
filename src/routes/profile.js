@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 
 const profileRouter = express.Router();
 
-profileRouter.get("/view", userAuth, async (req, res) => {
+profileRouter.get("/view", async (req, res) => {
     try {
         return res.status(200).send(req.user);
     } catch (error) {
@@ -14,7 +14,7 @@ profileRouter.get("/view", userAuth, async (req, res) => {
     }
 });
 
-profileRouter.patch("/edit", userAuth, async (req, res) => {
+profileRouter.patch("/edit", async (req, res) => {
     try {
         if (!validateProfileEditData(req)) {
             throw new Error("Invalid edit request");
@@ -33,7 +33,7 @@ profileRouter.patch("/edit", userAuth, async (req, res) => {
     }
 });
 
-profileRouter.patch("/password/edit", userAuth, async (req, res) => {
+profileRouter.patch("/password/edit", async (req, res) => {
     try {
         if (!validatePasswordEditData(req)) {
             throw new Error("Invalid password edit request");
